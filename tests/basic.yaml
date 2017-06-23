@@ -1,0 +1,20 @@
+version: "2.1"
+services:
+    sut:
+        build:
+            context: ./basic/
+            dockerfile: ./basic/${ODOO_MINOR}.Dockerfile
+        tty: true
+        ports:
+            - "127.0.0.1:8069:8069"
+        depends_on:
+            - db
+        command:
+            - run-parts
+            - custom/tests
+
+    db:
+        image: postgres:${DB_VERSION}-alpine
+        environment:
+            POSTGRES_USER: odoo
+            POSTGRES_PASSWORD: odoopass

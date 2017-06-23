@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+"""Run tests for this base image.
+
+Each test must be a valid docker-compose.yaml file with a `sut` service, in
+a similar fashion to what specifies the `Docker Cloud testing suite
+<https://docs.docker.com/docker-cloud/builds/automated-testing>`_.
+"""
+import logging
+import os
+import sys
+from glob import iglob
+from subprocess import CalledProcessError, check_call
+
+logging.name = "testall"
+_failures = []
+
+# Ensure we enter this same directory
+os.chdir(os.path.dirname(__file__))
+
+# Search for *.yaml test cases
+for case in iglob("*.yaml"):
+    try:
+        check_call(("docker-compose", "-f", case, "run", "sut"))
+        logging.info(u"Case {} succeeded".format(case))
+    except CalledProcessError:
+        logging.error(u"Case {} failed".format(case))
+        _failures.append(case)
+    finally:
+        check_call(("docker-compose", "-f", case, "down", "-v"))
+
+# Exit with failure code
+if _failures:
+    sys.exit(
+        u"These tests failed:\n- {}".format(
+            u"\n- ".join(_failures),
+        )
+    )
