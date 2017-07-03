@@ -1,5 +1,5 @@
 FROM debian:8
-MAINTAINER Tecnativa <info@tecnativa.com>
+MAINTAINER njeudy <njeudy@panda-chui.io>
 
 # Enable Odoo user and filestore
 RUN useradd -md /home/odoo -s /bin/false odoo \
@@ -47,7 +47,7 @@ ENV OPENERP_SERVER=/opt/odoo/auto/odoo.conf \
     UNACCENT=true \
     # Git and git-aggregator
     GIT_AUTHOR_NAME=docker-odoo \
-    EMAIL=https://hub.docker.com/r/tecnativa/odoo \
+    EMAIL=https://hub.docker.com/r/pandachi/odoo \
     DEPTH_DEFAULT=1 \
     DEPTH_MERGE=100 \
     # Postgres
@@ -126,8 +126,8 @@ RUN chmod -Rc a+rx common/entrypoint* common/build* /usr/local/bin \
 # Execute installation script by Odoo version
 # This is at the end to benefit from cache at build time
 # https://docs.docker.com/engine/reference/builder/#/impact-on-build-caching
-ARG ODOO_SOURCE=OCA/OCB
-ARG ODOO_VERSION=10.0
+ARG ODOO_SOURCE=odoo/odoo
+ARG ODOO_VERSION=saas-15
 ENV ODOO_VERSION="$ODOO_VERSION"
 RUN install.sh
 
@@ -136,8 +136,8 @@ ARG VCS_REF
 ARG BUILD_DATE
 ARG VERSION
 LABEL org.label-schema.schema-version="$VERSION" \
-      org.label-schema.vendor=Tecnativa \
+      org.label-schema.vendor=PandaChi \
       org.label-schema.license=Apache-2.0 \
       org.label-schema.build-date="$BUILD_DATE" \
       org.label-schema.vcs-ref="$VCS_REF" \
-      org.label-schema.vcs-url="https://github.com/Tecnativa/docker-odoo-base"
+      org.label-schema.vcs-url="https://github.com/njeudy/docker-odoo-base"
