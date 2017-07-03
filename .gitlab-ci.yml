@@ -1,4 +1,6 @@
-image: tmaier/docker-compose:latest
+image: gitlab/dind:latest
+services:
+  - docker:dind
 variables:
   REGISTRY_HOST: registry.panda-chi.io
   TEST_IMAGE: $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_BUILD_REF_NAME
