@@ -3,7 +3,7 @@ services:
   - docker:dind
 variables:
   REGISTRY_HOST: registry.panda-chi.io
-  TEST_IMAGE: $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_BUILD_REF_NAME
+  TEST_IMAGE: $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME
   RELEASE_IMAGE: $REGISTRY_HOST/$CI_PROJECT_PATH:latest
 before_script:
   - export DOCKER_API_VERSION=1.22
@@ -12,5 +12,5 @@ before_script:
 buildJob:
   script:
     - docker build --pull --build-arg VCS_REF=`git rev-parse --short HEAD`  -t $TEST_IMAGE .
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.panda-chi.io
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN git.panda-chi.io:5002
     - docker push $TEST_IMAGE
