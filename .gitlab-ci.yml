@@ -9,7 +9,6 @@ before_script:
   - export DOCKER_API_VERSION=1.22
   - docker info
   - docker-compose --version
-  - apk add --update alpine-sdk
 buildJob:
   script:
     - docker build --pull --build-arg VCS_REF=`git rev-parse --short HEAD`  -t TEST_IMAGE .
