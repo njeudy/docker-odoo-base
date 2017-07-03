@@ -11,6 +11,6 @@ before_script:
   - docker-compose --version
 buildJob:
   script:
-    - docker build --pull --build-arg VCS_REF=`git rev-parse --short HEAD`  -t TEST_IMAGE .
+    - docker build --pull --build-arg VCS_REF=`git rev-parse --short HEAD`  -t $TEST_IMAGE .
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.panda-chi.io
     - docker push $TEST_IMAGE
