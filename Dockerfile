@@ -127,7 +127,7 @@ RUN chmod -Rc a+rx common/entrypoint* common/build* /usr/local/bin \
 # This is at the end to benefit from cache at build time
 # https://docs.docker.com/engine/reference/builder/#/impact-on-build-caching
 ARG ODOO_SOURCE=odoo/odoo
-ARG ODOO_VERSION=saas-15
+ARG ODOO_VERSION=saas-16
 ENV ODOO_VERSION="$ODOO_VERSION"
 RUN install.sh
 
