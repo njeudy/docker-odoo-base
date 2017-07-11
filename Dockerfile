@@ -143,7 +143,7 @@ RUN mkdir -p auto/addons custom/src/private \
 # This is at the end to benefit from cache at build time
 # https://docs.docker.com/engine/reference/builder/#/impact-on-build-caching
 ARG ODOO_SOURCE=odoo/odoo
-ARG ODOO_VERSION=saas-16
+ARG ODOO_VERSION=10.0
 ENV ODOO_VERSION="$ODOO_VERSION"
 RUN install.sh
 
