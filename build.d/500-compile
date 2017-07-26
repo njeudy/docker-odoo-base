@@ -8,4 +8,5 @@ fi
 
 log INFO Compiling all Python code in /opt/odoo
 log DEBUG PYTHONOPTIMIZE set to $PYTHONOPTIMIZE
+export PYTHONOPTIMIZE=0
 python -m compileall -q /opt/odoo
