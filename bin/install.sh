@@ -44,10 +44,10 @@ sed -ir 's/psycopg2/#\0/' $reqs
 
 optimize="$PYTHONOPTIMIZE"
 if [ $PYTHONOPTIMIZE -gt 1 ]; then
-    export PYTHONOPTIMIZE=1
+    export PYTHONOPTIMIZE=0
 fi
 pip install --no-cache-dir $pip_deps
-export PYTHONOPTIMIZE="$optimize"
+export PYTHONOPTIMIZE=0
 
 # Security upgrades
 pip install --no-cache-dir "psycopg2>=2.7" # ODOO-SA-2017-06-15-1
