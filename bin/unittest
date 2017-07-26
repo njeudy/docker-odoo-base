@@ -6,6 +6,5 @@ shift
 log INFO Executing Odoo in unittest mode for addons $addons
 # HACK `--workers 0`: https://github.com/odoo/odoo/pull/14809
 set -x
-export PYTHONPTH=$PYTHONPATH:/opt/odoo/custom/src/odoo 
-export PYTHONOPTIMIZE=0 
+export PYTHONOPTIMIZE="" 
 exec /usr/local/bin/odoo --workers 0 --test-enable --stop-after-init --update "$addons" "$@"
