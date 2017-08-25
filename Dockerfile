@@ -124,8 +124,10 @@ RUN curl -SLo wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releas
 # Other facilities
 WORKDIR /opt/odoo
 RUN pip install --no-cache-dir \
-    astor git-aggregator openupgradelib ptvsd==3.0.0 pudb wdb
+astor git-aggregator openupgradelib ptvsd==3.0.0 pudb wdb pytest-odoo
 COPY bin/* /usr/local/bin/
+COPY bin/direxec.sh common/entrypoint.sh
+RUN ln common/entrypoint.sh common/build.sh
 COPY lib/odoobaselib /usr/local/lib/python2.7/dist-packages/odoobaselib
 COPY build.d common/build.d
 COPY conf.d common/conf.d
